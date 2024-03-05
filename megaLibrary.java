@@ -10,7 +10,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import frc.robot.subsystems.DriveSubsystem.DriveConstants;
 
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -127,18 +126,5 @@ public class megaLibrary {
 
     public double GetDutyCycleEncoderAngle(DutyCycleEncoder encoder) {
         return encoder.getAbsolutePosition() * 360;
-    }
-
-    //SWERVE STUFF
-    public void initializeSwerveDriveKinematics(SwerveDriveKinematics kinematics){
-            kinematics = new SwerveDriveKinematics(
-            new Translation2d(DriveConstants.DRIVETRAIN_TRACKWIDTH_METERS / 2.0,
-                    DriveConstants.DRIVETRAIN_WHEELBASE_METERS / 2.0),
-            new Translation2d(DriveConstants.DRIVETRAIN_TRACKWIDTH_METERS / 2.0,
-                    -DriveConstants.DRIVETRAIN_WHEELBASE_METERS / 2.0),
-            new Translation2d(-DriveConstants.DRIVETRAIN_TRACKWIDTH_METERS / 2.0,
-                    DriveConstants.DRIVETRAIN_WHEELBASE_METERS / 2.0),
-            new Translation2d(-DriveConstants.DRIVETRAIN_TRACKWIDTH_METERS / 2.0,
-                    -DriveConstants.DRIVETRAIN_WHEELBASE_METERS / 2.0));
     }
 }
