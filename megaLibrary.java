@@ -6,13 +6,10 @@ package frc.robot;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import frc.robot.modules.KrakenSwerveModule;
 import frc.robot.subsystems.DriveSubsystem.DriveConstants;
 
 import com.ctre.phoenix6.controls.Follower;
@@ -97,13 +94,23 @@ public class megaLibrary {
         led.setData(ledBuffer);
     }
 
-    public void sequenceLED(AddressableLEDBuffer ledBuffer, int red1, int green1, int blue1, int red2, int green2, int blue2){
+    public void sequenceLED(AddressableLED led, AddressableLEDBuffer ledBuffer, int red1, int green1, int blue1, int red2, int green2, int blue2){
         for (int i = 0; i < ledBuffer.getLength(); i++) {
-            if (i % 2 == 0)
-              ledBuffer.setRGB(i, red1, green1, blue1);
-            else
-              ledBuffer.setRGB(i, red2, green2, blue2);
+            if (i % 2 == 0){
+               ledBuffer.setRGB(i, red1, green1, blue1);
+              led.setData(ledBuffer); 
+            }
+            else{
+                ledBuffer.setRGB(i, red2, green2, blue2);
+              led.setData(ledBuffer);
+            }
           }
+    }
+
+    public void clearLED(AddressableLED led, AddressableLEDBuffer ledBuffer){
+        for (int i = 0; i < ledBuffer.getLength(); i++)
+        ledBuffer.setRGB(i, 0, 0, 0);
+        led.setData(ledBuffer);
     }
 
     //MATH STUFF
@@ -118,7 +125,7 @@ public class megaLibrary {
 
     //ENCODERS
 
-    public double angle(DutyCycleEncoder encoder) {
+    public double GetDutyCycleEncoderAngle(DutyCycleEncoder encoder) {
         return encoder.getAbsolutePosition() * 360;
     }
 
